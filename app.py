@@ -14,16 +14,16 @@ values = {
 def send_welcome(message: telebot.types.Message):
     text = f"Welcome, {message.chat.username}\nTo get started, enter the command following way\n"
     text += "<currency name> <converted currency> <amount>\n"
-    text += "To get list of available currencies type /values"
+    text += "To get list of available currencies type  /values"
     bot.reply_to(message, text)
 
 
 @bot.message_handler(commands=["values"])
-def get_values(message):
+def get_values(message: telebot.types.Message):
     text = "Available currencies:"
     for keys in values.keys():
         text += f"\n{keys}"
-    bot.send_message(message, text)
+    bot.send_message(message.chat.id, text)
 
 
 bot.polling(none_stop=True)
