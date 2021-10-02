@@ -32,7 +32,7 @@ def converter(message: telebot.types.Message):
     except Exception as e:
         bot.reply_to(message, e)
     else:
-        text = f"{values[2]} {values[0]} = {result} {exchanger[values[1]]}"
+        text = f"{values[2]} {exchanger[values[0]]} = {result} {exchanger[values[1]]}"
         bot.send_message(message.chat.id, text)
 
 

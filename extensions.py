@@ -1,4 +1,5 @@
 import requests
+import json
 from config import exchanger, API_KEY
 
 
@@ -32,5 +33,5 @@ class Converter:
             raise APIExceptions(f"Can't convert same currencies: {base}")
 
         request = requests.get(f"https://currate.ru/api/?get=rates&pairs={quote_ticker}{base_ticker}&key={API_KEY}")
-        result = float(request.json()["data"][f"{quote_ticker}{base_ticker}"]) * amount
+        result = float(json.loads(request.content)["data"][f"{quote_ticker}{base_ticker}"]) * amount
         return round(result, 3)
