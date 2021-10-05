@@ -1,6 +1,6 @@
 import requests
 import json
-from config import exchanger, API_KEY
+from config import API_KEY
 
 
 class APIExceptions(Exception):
@@ -13,17 +13,8 @@ class Converter:
         if len(values) != 3:
             raise APIExceptions("Wrong number of parameters")
         quote, base, amount = values
-
-        try:
-            quote_ticker = exchanger[quote]
-        except KeyError:
-            raise APIExceptions(f"This bot doesn't support currency: {base}")
-
-        try:
-            base_ticker = exchanger[base]
-        except KeyError:
-            raise APIExceptions(f"This bot doesn't support currency: {base}")
-
+        quote_ticker = quote
+        base_ticker = base
         try:
             amount = float(amount)
         except ValueError:
